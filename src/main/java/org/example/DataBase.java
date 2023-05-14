@@ -1,10 +1,13 @@
 package org.example;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DataBase {
+    List<Map<String, Object>> list = new ArrayList<>();
+
     public List<Map<String, Object>> execute(String request) {
         StringBuilder action = new StringBuilder();
         StringBuilder value = new StringBuilder();
@@ -24,7 +27,8 @@ public class DataBase {
             case "SELECT" -> selectValues(value.toString());
             default -> System.out.println("Wrong Request");
         }
-        return new ArrayList<>();
+        System.out.println(list);
+        return list;
     }
 
     private void insertValues(String value) {
@@ -53,8 +57,7 @@ public class DataBase {
             }
         }
         row.put(key.toString(), mapValue.toString());
-
-        System.out.println(row.keySet() +"\n" + row.values());
+        list.add(row);
     }
 
     private void updateValues(String value) {
@@ -62,7 +65,26 @@ public class DataBase {
     }
 
     private void deleteValues(String value) {
+        value = value.replaceAll(" ", "");
+        StringBuilder key = new StringBuilder();
+        StringBuilder mapValue = new StringBuilder();
 
+        for (int i = 0; i != value.length(); i++) {
+            if (value.charAt(i) == '=') {
+                while (i != value.length() - 1) {
+                    i++;
+                    mapValue.append(value.charAt(i));
+                }
+            } else {
+                key.append(value.charAt(i));
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, Object> row = list.get(i);
+            if (row.containsKey(key.toString()) == true & row.containsValue(mapValue.toString()) == true) {
+                list.remove(i);
+            }
+        }
     }
 
     private void selectValues(String value) {

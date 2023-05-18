@@ -81,8 +81,9 @@ public class DataBase {
         }
         for (int i = 0; i < list.size(); i++) {
             Map<String, Object> row = list.get(i);
-            if (row.containsKey(key.toString()) == true & row.containsValue(mapValue.toString()) == true) {
+            if (row.containsKey(key.toString()) & row.containsValue(mapValue.toString())) {
                 list.remove(i);
+                i--;
             }
         }
     }

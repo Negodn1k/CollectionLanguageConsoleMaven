@@ -27,7 +27,6 @@ public class DataBase {
             case "SELECT" -> selectValues(value.toString());
             default -> System.out.println("Wrong Request");
         }
-        System.out.println(list);
         return list;
     }
 
@@ -137,6 +136,30 @@ public class DataBase {
     }
 
     private void selectValues(String value) {
+        value = value.replaceAll(" ", "");
+        value = value.replaceAll("'", "");
+        value = value.replaceAll("WHERE", "");
+        value = value.replaceAll("VALUES", "");
+        StringBuilder key = new StringBuilder();
+        StringBuilder mapValue = new StringBuilder();
 
+        for (int i = 0; i < value.length(); i++) {
+            if (value.charAt(i) == '=') {
+                i++;
+                while (i < value.length()) {
+                    mapValue.append(value.charAt(i));
+                    i++;
+                }
+                break;
+            }
+            key.append(value.charAt(i));
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, Object> row = list.get(i);
+            if (row.containsKey(key.toString()) & row.containsValue(mapValue.toString())) {
+                System.out.println(row);
+            }
+        }
     }
 }

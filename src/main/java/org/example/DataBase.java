@@ -38,6 +38,7 @@ public class DataBase {
         value = value.replaceAll(" ", "");
         value = value.replaceAll("'", "");
         value = value.replaceAll("WHERE", "");
+        value = value.replaceAll("VALUES", "");
 
         for (int i = 0; i != value.length(); i++) {
             if (value.charAt(i) == '=') {
@@ -65,6 +66,7 @@ public class DataBase {
     private void updateValues(String value) {
         value = value.replaceAll(" ", "");
         value = value.replaceAll("'", "");
+        value = value.replaceAll("VALUES", "");
         StringBuilder key = new StringBuilder();
         StringBuilder mapValue = new StringBuilder();
         StringBuilder oldKey = new StringBuilder();
@@ -111,6 +113,7 @@ public class DataBase {
         value = value.replaceAll(" ", "");
         value = value.replaceAll("'", "");
         value = value.replaceAll("WHERE", "");
+        value = value.replaceAll("VALUES", "");
         StringBuilder key = new StringBuilder();
         StringBuilder mapValue = new StringBuilder();
 

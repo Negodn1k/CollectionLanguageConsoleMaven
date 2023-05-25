@@ -36,6 +36,8 @@ public class DataBase {
         StringBuilder key = new StringBuilder();
         StringBuilder mapValue = new StringBuilder();
         value = value.replaceAll(" ", "");
+        value = value.replaceAll("'", "");
+        value = value.replaceAll("WHERE", "");
 
         for (int i = 0; i != value.length(); i++) {
             if (value.charAt(i) == '=') {
@@ -61,11 +63,54 @@ public class DataBase {
     }
 
     private void updateValues(String value) {
+        value = value.replaceAll(" ", "");
+        value = value.replaceAll("'", "");
+        StringBuilder key = new StringBuilder();
+        StringBuilder mapValue = new StringBuilder();
+        StringBuilder oldKey = new StringBuilder();
+        StringBuilder oldValue = new StringBuilder();
 
+        for (int i = 0; i < value.length(); i++) {
+            while (value.charAt(i) != '=') {
+                key.append(value.charAt(i));
+                if (key.toString().equals("WHERE")) {
+                    i++;
+                    key.delete(0, 1000);
+
+                    while (value.charAt(i) != '=') {
+                        oldKey.append(value.charAt(i));
+                        i++;
+                    }
+                    i++;
+                    while (value.charAt(i) != ',') {
+                        oldValue.append(value.charAt(i));
+                        i++;
+                    }
+                    break;
+                }
+                i++;
+            }
+            if (value.charAt(i) == '=') {
+                i++;
+                while (i < value.length()) {
+                    mapValue.append(value.charAt(i));
+                    i++;
+                }
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, Object> row = list.get(i);
+            if (row.containsKey(oldKey.toString()) & row.containsValue(oldValue.toString())) {
+                row.replace(key.toString(), mapValue);
+                list.set(i, row);
+            }
+        }
     }
 
     private void deleteValues(String value) {
         value = value.replaceAll(" ", "");
+        value = value.replaceAll("'", "");
+        value = value.replaceAll("WHERE", "");
         StringBuilder key = new StringBuilder();
         StringBuilder mapValue = new StringBuilder();
 

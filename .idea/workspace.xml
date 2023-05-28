@@ -91,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685017070820</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Do a SELECT">
+      <created>1685017852678</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685017852678</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -100,6 +107,14 @@
     <MESSAGE value="Do a delete" />
     <MESSAGE value="Do a Update" />
     <MESSAGE value="Do a little fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Do a little fixes" />
+    <MESSAGE value="Do a SELECT" />
+    <option name="LAST_COMMIT_MESSAGE" value="Do a SELECT" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((HashMap)row).entrySet().toArray()[1]" custom="java.util.HashMap" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

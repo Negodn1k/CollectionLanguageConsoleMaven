@@ -263,8 +263,7 @@ public class DataBase {
         }
         if (comparison.toString().equals(">")) {
             int oldIntValue;
-            for (int i = 0; i < list.size(); i++) {
-                Map<String, Object> row = list.get(i);
+            for (Map<String, Object> row : list) {
                 oldIntValue = Integer.parseInt(mapValue.toString());
                 for (int index = oldIntValue; index < mapMaxValue(row); index++) {
                     if (row.containsKey(key.toString()) & row.get(key.toString()).equals(index)) {
@@ -286,7 +285,8 @@ public class DataBase {
             val = values.get(i).toString();
             try {
                 oldValue = Integer.parseInt(val);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException ignored) {
+
             }
             if (oldValue > maxValue) {
                 maxValue = oldValue;

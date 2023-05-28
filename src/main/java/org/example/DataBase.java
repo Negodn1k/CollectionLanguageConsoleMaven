@@ -240,8 +240,14 @@ public class DataBase {
 
         if (comparison.toString().equals("=")) {
             for (Map<String, Object> row : list) {
-                if (row.containsKey(key.toString()) & row.containsValue(mapValue.toString())) {
-                    System.out.println(row);
+                try {
+                    if (row.containsKey(key.toString()) & row.get(key.toString()).equals(Integer.parseInt(mapValue.toString()))) {
+                        System.out.println(row);
+                    }
+                } catch (NumberFormatException e) {
+                    if (row.containsKey(key.toString()) & row.get(key.toString()).equals(mapValue.toString())) {
+                        System.out.println(row);
+                    }
                 }
             }
         }
